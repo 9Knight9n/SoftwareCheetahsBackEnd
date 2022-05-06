@@ -1,4 +1,4 @@
-from push_notifications.models import GCMDevice
+# from push_notifications.models import GCMDevice
 from rest_framework import status
 from rest_framework.decorators import permission_classes, api_view
 from rest_framework.permissions import IsAuthenticated

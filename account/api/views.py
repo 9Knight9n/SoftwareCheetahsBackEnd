@@ -240,7 +240,7 @@ def send_email(request):
 
         email_to_send.content_subtype = "html"
         email_to_send.fail_silently = False
-        email_to_send.send()
+        # email_to_send.send()
 
         try:
             vc_code_object = VerificationCode.objects.get(email=email)

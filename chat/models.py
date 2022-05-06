@@ -17,7 +17,7 @@ class Message(models.Model):
     image = models.ImageField(upload_to='chats/images/', null=True, blank=True)
     file = models.FileField(upload_to='chats/documents/', null=True, blank=True)
     owner = models.ForeignKey(Account, on_delete=models.SET_NULL, null=True, blank=True)
-    text = models.TextField(null=True, blank=True)
+    text = models.CharField(null=True, blank=True,max_length=1000)
     parent_message = models.ForeignKey("self", null=True, blank=True, on_delete=models.SET_NULL)
     time = models.DateTimeField(db_index=True)
 

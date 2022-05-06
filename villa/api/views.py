@@ -3,7 +3,7 @@ import datetime
 import json
 
 from django.core.files.base import ContentFile
-from push_notifications.models import GCMDevice
+# from push_notifications.models import GCMDevice
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -330,14 +330,14 @@ class UserVilla(APIView):
 
         villa.save()
 
-        try:
-            fcm_devices = GCMDevice.objects.all().exclude(user=self.request.user)
-            for device in fcm_devices:
-                device.send_message(title=f"Hey, We've got a new villa for you!",
-                                    message=f"{villa.country}, {villa.state}, {villa.city}"
-                                    )
-        except Exception as e:
-            print(f"Error: {e}")
+        # try:
+        #     # fcm_devices = GCMDevice.objects.all().exclude(user=self.request.user)
+        #     for device in fcm_devices:
+        #         device.send_message(title=f"Hey, We've got a new villa for you!",
+        #                             message=f"{villa.country}, {villa.state}, {villa.city}"
+        #                             )
+        # except Exception as e:
+        #     print(f"Error: {e}")
 
         return Response(f"Villa with villa_id {villa.villa_id} created successfully!",
                         status=status.HTTP_201_CREATED)
@@ -481,19 +481,20 @@ def register_villa(request):
     if serializer.is_valid():
         villa = serializer.save()
 
-        try:
-            customer_device = GCMDevice.objects.get(user=request.user)
-            host_device = GCMDevice.objects.get(user=villa.owner)
-
-            customer_device.send_message(title=f"Reservation done!",
-                                         message=f"The villa reserved for you between {start_date} - {end_date}"
-                                         )
-
-            host_device.send_message(title=f"Hey, you have a new guest!",
-                                     message=f"A new customer reserved your villa between {start_date} - {end_date}"
-                                     )
-        except Exception as e:
-            print(f"Error: {e}")
+        # try:
+        #     # customer_device = GCMDevice.objects.get(user=request.user)
+        #     # host_device = GCMDevice.objects.get(user=villa.owner)
+        #
+        #
+        #     customer_device.send_message(title=f"Reservation done!",
+        #                                  message=f"The villa reserved for you between {start_date} - {end_date}"
+        #                                  )
+        #
+        #     host_device.send_message(title=f"Hey, you have a new guest!",
+        #                              message=f"A new customer reserved your villa between {start_date} - {end_date}"
+        #                              )
+        # except Exception as e:
+        #     print(f"Error: {e}")
 
         return Response(f"Villa with villa_id {villa.villa_id} registered successfully!",
                         status=status.HTTP_201_CREATED)

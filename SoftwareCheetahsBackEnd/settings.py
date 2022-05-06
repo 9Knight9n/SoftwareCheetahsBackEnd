@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'django_cleanup',
     'django_crontab',
     'rest_framework.authtoken',
-    'push_notifications',
+    # 'push_notifications',
     'chat',
     'account',
     'villa',
@@ -119,9 +119,21 @@ CHANNEL_LAYERS = {
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'CONN_MAX_AGE': 3600,
+        'NAME': 'db_project',
+        'USER': 'dbadmin',
+        'PASSWORD': '123456789',
+        'HOST': 'db',  # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
+        # 'OPTIONS': {
+        #     'charset': 'utf8mb4'  # This is the important line
+        # }
     }
 }
 
@@ -148,8 +160,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "info.sweethome2021@gmail.com"
-EMAIL_HOST_PASSWORD = "s-cheetahs1400"
+EMAIL_HOST_USER = "mdsdn9@gmail.com"
+EMAIL_HOST_PASSWORD = "v4M5ykZAuGtgSZ"
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

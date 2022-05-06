@@ -4,12 +4,12 @@ from django.db import models
 from account.models import Account
 
 
-class Facility(models.Model):
-    facility_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=20)
-
-    def __str__(self):
-        return self.name
+# class Facility(models.Model):
+#     facility_id = models.AutoField(primary_key=True)
+#     name = models.CharField(max_length=20)
+#
+#     def __str__(self):
+#         return self.name
 
 
 class Image(models.Model):
@@ -30,9 +30,10 @@ class Document(models.Model):
         return f"Document ID: {self.document_id}"
 
 
-class Rule(models.Model):
-    rule_id = models.AutoField(primary_key=True)
-    text = models.TextField(unique=True)
+class Detail(models.Model):
+    type = models.CharField(max_length=10)
+    Detail_id = models.AutoField(primary_key=True)
+    text = models.CharField(unique=True,max_length=1000)
 
     def __str__(self):
         return self.text
@@ -55,7 +56,6 @@ class Villa(models.Model):
     description = models.TextField(blank=True, null=True)
     price_per_night = models.IntegerField()
     images = models.ManyToManyField(Image, blank=True)
-    facilities = models.ManyToManyField(Facility, blank=True)
     country = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
@@ -73,7 +73,7 @@ class Villa(models.Model):
     number_of_double_beds = models.IntegerField(default=1)
     number_of_showers = models.IntegerField(default=1)
     documents = models.ManyToManyField(Document, blank=True)
-    rules = models.ManyToManyField(Rule, blank=True)
+    details = models.ManyToManyField(Detail, blank=True)
     visible = models.BooleanField(default=True)
     rate = models.FloatField(null=True, blank=True)
     no_rate = models.IntegerField(default=0)
