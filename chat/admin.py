@@ -5,7 +5,7 @@ from .models import *
 
 
 class MessageAdmin(admin.ModelAdmin):
-    list_display = ['message_id', 'chat', 'owner', 'text', 'time']
+    list_display = ['id', 'chat', 'owner', 'text', 'time']
     search_fields = ['text']
     list_filter = ['chat']
 
@@ -17,7 +17,7 @@ admin.site.register(Message, MessageAdmin)
 
 
 class ChatAdmin(admin.ModelAdmin):
-    list_display = ['chat_id', 'account1', 'account2']
+    list_display = ['id', 'account1', 'account2']
 
     class Meta:
         model = Chat

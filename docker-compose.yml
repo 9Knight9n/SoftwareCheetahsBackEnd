@@ -8,7 +8,7 @@ services:
             - .:/app
             - static_volume:/app/static
         depends_on:
-            - db
+            - db_django
 #    db:
 #        image: gvenzl/oracle-xe:slim
 #        volumes:
@@ -22,6 +22,17 @@ services:
 #            ORACLE_DATABASE: 'db_project'
 #            APP_USER: 'dbadmin'
 #            APP_USER_PASSWORD: '123456789'
+    db_django:
+        image: mysql/mysql-server:8.0
+#        ports:
+#            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: 'root'
+            MYSQL_DATABASE: 'db_project'
+            MYSQL_USER: 'dbadmin'
+            MYSQL_PASSWORD: '123456789'
+        volumes:
+            - my-datavolume:/var/lib/mysql
     db:
         image: mysql/mysql-server:8.0
         ports:
@@ -32,19 +43,20 @@ services:
             MYSQL_USER: 'dbadmin'
             MYSQL_PASSWORD: '123456789'
         volumes:
-            - my-datavolume:/var/lib/mysql
+            - my-datavolume-normalized:/var/lib/mysql
     phpmyadmin:
-        image: phpmyadmin
+        image: phpmyadmin:5.2.0
 #        restart: always
         ports:
             - "8081:80"
         environment:
             PMA_ARBITRARY: 1
-            PMA_HOST: 'db'
+            PMA_HOST: 'db_django'
             PMA_USER: 'dbadmin'
             PMA_PASSWORD: '123456789'
         depends_on:
-            - db
+            - db_django
 volumes:
     static_volume:
     my-datavolume:
+    my-datavolume-normalized:

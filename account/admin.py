@@ -13,7 +13,7 @@ class AccountAdmin(UserAdmin):
             'classes': ('wide',),
             'fields': ('first_name', 'last_name', 'email', 'phone_number', 'password1', 'password2', 'role',
                        'national_code', 'gender', 'birthday', 'image', 'bio',)}),)
-    list_display = ('user_id', 'first_name', 'last_name', 'email', 'get_date_joined', 'role', 'is_admin')
+    list_display = ('id', 'first_name', 'last_name', 'email', 'get_date_joined', 'role', 'is_admin')
     search_fields = ('first_name', 'last_name', 'email')
     list_filter = ('role',)
     exclude = ('password',)
@@ -48,16 +48,66 @@ class VerificationCodeAdmin(admin.ModelAdmin):
 admin.site.register(VerificationCode, VerificationCodeAdmin)
 
 
-class DocumentAdmin(admin.ModelAdmin):
-    list_display = ['document_id', 'get_user']
-    list_filter = ['user']
+# Register your models here.
+class VillaAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'type', 'country', 'city', 'get_owner', 'visible']
+    search_fields = ['name', 'country', 'city']
+    list_filter = ['type']
 
-    def get_user(self, obj):
-        result = Account.objects.get(user_id=obj.user_id)
+    def get_owner(self, obj):
+        result = Villa.objects.get(villa_id=obj.id)
+        return result.owner.first_name + ' ' + result.owner.last_name
+
+    class Meta:
+        model = Villa
+
+
+admin.site.register(Villa, VillaAdmin)
+
+
+class ImageAdmin(admin.ModelAdmin):
+    list_display = ['id', 'title', 'get_villa', 'default']
+    search_fields = ['title']
+    list_filter = ['default']
+
+    def get_villa(self, obj):
+        result = Villa.objects.get(images__image_id=obj.id)
         return result.__str__()
+
+    class Meta:
+        model = Image
+
+
+admin.site.register(Image, ImageAdmin)
+
+
+class DocumentAdmin(admin.ModelAdmin):
+    list_display = ['id']
 
     class Meta:
         model = Document
 
 
 admin.site.register(Document, DocumentAdmin)
+
+
+class DetailAdmin(admin.ModelAdmin):
+    list_display = ['id', 'type']
+    search_fields = ['type']
+
+    class Meta:
+        model = Detail
+
+
+admin.site.register(Detail, DetailAdmin)
+
+
+class CalendarAdmin(admin.ModelAdmin):
+    list_display = ['id', 'customer', 'villa', 'start_date', 'end_date', 'closed']
+    list_filter = ['villa']
+
+    class Meta:
+        model = Calendar
+
+
+admin.site.register(Calendar, CalendarAdmin)

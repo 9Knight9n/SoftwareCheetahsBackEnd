@@ -4,7 +4,7 @@ from account.api.serializer import *
 from rest_framework import status
 from django.db.models import Q
 
-from villa.models import Villa
+from account.models import Villa
 from account.models import Account
 
 @api_view(['POST'])
