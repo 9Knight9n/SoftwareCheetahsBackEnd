@@ -135,6 +135,14 @@ DATABASES = {
         #     'charset': 'utf8mb4'  # This is the important line
         # }
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.oracle',
+    #     'NAME': 'db_project',
+    #     'USER': 'dbadmin',
+    #     'PASSWORD': '123456789',
+    #     'HOST': 'db',
+    #     'PORT': '1521',
+    # }
 }
 
 # Password validation

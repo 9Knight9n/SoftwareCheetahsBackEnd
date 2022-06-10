@@ -46,15 +46,15 @@ class DocumentAdmin(admin.ModelAdmin):
 admin.site.register(Document, DocumentAdmin)
 
 
-# class FacilityAdmin(admin.ModelAdmin):
-#     list_display = ['facility_id', 'name']
-#     search_fields = ['name']
-#
-#     class Meta:
-#         model = Facility
-#
-#
-# admin.site.register(Facility, FacilityAdmin)
+class FacilityAdmin(admin.ModelAdmin):
+    list_display = ['facility_id', 'name']
+    search_fields = ['name']
+
+    class Meta:
+        model = Facility
+
+
+admin.site.register(Facility, FacilityAdmin)
 
 
 class CalendarAdmin(admin.ModelAdmin):
@@ -68,12 +68,12 @@ class CalendarAdmin(admin.ModelAdmin):
 admin.site.register(Calendar, CalendarAdmin)
 
 
-class DetailAdmin(admin.ModelAdmin):
-    list_display = ['Detail_id', 'text']
+class RuleAdmin(admin.ModelAdmin):
+    list_display = ['rule_id', 'text']
     list_filter = ['text']
 
     class Meta:
-        model = Detail
+        model = Rule
 
 
-admin.site.register(Detail, DetailAdmin)
+admin.site.register(Rule, RuleAdmin)

@@ -53,7 +53,7 @@ class Account(AbstractBaseUser):
     last_name = models.CharField(max_length=40)
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
     phone_number = models.CharField(max_length=13, unique=True)
-    password = models.CharField(max_length=20, blank=True)
+    password = models.CharField(max_length=200, blank=True)
     role = models.CharField(default='normal-user', max_length=20, verbose_name='role')
     currency = models.FloatField(default=0.0)
 

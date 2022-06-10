@@ -24,10 +24,10 @@ class VillaSearchSerializer(serializers.ModelSerializer):
                 return i.image.url
 
 
-class DetailSerializer(serializers.ModelSerializer):
+class RuleSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Detail
+        model = Rule
         fields = '__all__'
 
 
